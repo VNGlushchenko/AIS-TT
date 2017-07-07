@@ -119,18 +119,15 @@
         	if(vm.pagination.pagesCount != vm.pagination.currentPage) {
         		vm.pagination.currentPage++;
         		vm.pagination.firstRowNumber += vm.pagination.countPerPage;
-        		} else {
-        		return;
-        	}
+        		}
         }
         function previousPage() {
         	if(vm.pagination.currentPage != 1) {
         		vm.pagination.currentPage--;
         		vm.pagination.firstRowNumber -= vm.pagination.countPerPage;
-         	} else {
-        		return;
-        	}
+         	}
         }
+        
     }
 
 })();

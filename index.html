@@ -9,15 +9,25 @@
 
 <body ng-app="myApp">
 <div ng-controller="DashboardCtrl as vm">
-    <p>Show 
-        <select ng-model="vm.pagination.countPerPage" ng-change="vm.pagination.rowCountChange()">
+ 
+    <label for="orderStatus">Choose status:</label>
+        <select id="orderStatus" ng-model="ordStatus">
+          <option ng-value="N">--choose status--</option>
+          <option ng-value="open">open</option>
+          <option ng-value="pending">pending</option>
+          <option ng-value="closed">closed</option>
+        </select>
+    <br>
+    <br>
+    <label for="pagination">Show</label>
+        <select ng-model="vm.pagination.countPerPage" ng-change="vm.pagination.rowCountChange()" id="pagination">
           <option ng-value="{{ vm.model.orders.length }}">all</option>
           <option ng-value="5">5</option>
           <option ng-value="10">10</option>
           <option ng-value="20">20</option>
         </select>
-    </p>
-
+    <br>
+    <br>
     <table class="orders">
         <tr>
             <th ng-click="vm.menu.orderBy('date')">
@@ -41,18 +51,20 @@
                 <span ng-show="vm.model.orderParam == 'description'" class="sortorder" ng-class="{reverse: vm.model.reverse}"></span>
             </th>
         </tr>
-        <tr ng-repeat="order in vm.model.orders | orderBy : vm.model.orderParam : vm.model.reverse | limitTo : vm.pagination.countPerPage : vm.pagination.firstRowNumber">
+        <tr ng-repeat="order in vm.model.orders | orderBy : vm.model.orderParam : vm.model.reverse | limitTo : vm.pagination.countPerPage : vm.pagination.firstRowNumber | orderStatus: ordStatus">
             <td>{{ order.date | date : 'dd.MM.yyyy' }}</td>
             <td>{{ order.country }}</td>
             <td>{{ order.price | currency : '&pound;' }}</td>
-            <td>{{ order.status | limitTo : 1 | uppercase }}</td>
+            <td>{{ order.status | limitTo : 1 | uppercase}}</td>
             <td>{{ order.description | cut : 15 }}</td>
         </tr>
     </table>
     <br>
+    <div ng-show="vm.pagination.countPerPage != vm.model.orders.length">
     <button ng-click="vm.pagination.previousPage()" ng-disabled="vm.pagination.currentPage == 1">Previous</button>
     {{vm.pagination.currentPage}} from {{vm.pagination.pagesCount}}
     <button ng-click="vm.pagination.nextPage()" ng-disabled="vm.pagination.pagesCount == vm.pagination.currentPage">Next</button>
+    <div>
 </div>
 </body>
 
@@ -60,6 +72,7 @@
 <script src="js/core.module.js"></script>
 <script src="js/dashboard.controller.js"></script>
 <script src="js/filters/cut.filter.js"></script>
+<script src="js/filters/orderStatus.filter.js"></script>
 
 </body>
 </html>
