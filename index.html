@@ -10,11 +10,11 @@
 <body ng-app="myApp">
 <div ng-controller="DashboardCtrl as vm">
     <p>Show 
-        <select ng-model="vm.pagination.countPerPage">
-          <option value="{{ vm.model.orders.length }}">all</option>
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="20">20</option>
+        <select ng-model="vm.pagination.countPerPage" ng-change="vm.pagination.rowCountChange()">
+          <option ng-value="{{ vm.model.orders.length }}">all</option>
+          <option ng-value="5">5</option>
+          <option ng-value="10">10</option>
+          <option ng-value="20">20</option>
         </select>
     </p>
 
@@ -41,7 +41,7 @@
                 <span ng-show="vm.model.orderParam == 'description'" class="sortorder" ng-class="{reverse: vm.model.reverse}"></span>
             </th>
         </tr>
-        <tr ng-repeat="order in vm.model.orders | orderBy : vm.model.orderParam : vm.model.reverse | limitTo : vm.pagination.countPerPage">
+        <tr ng-repeat="order in vm.model.orders | orderBy : vm.model.orderParam : vm.model.reverse | limitTo : vm.pagination.countPerPage : vm.pagination.firstRowNumber">
             <td>{{ order.date | date : 'dd.MM.yyyy' }}</td>
             <td>{{ order.country }}</td>
             <td>{{ order.price | currency : '&pound;' }}</td>
@@ -50,9 +50,9 @@
         </tr>
     </table>
     <br>
-    <button>Previous</button>
+    <button ng-click="vm.pagination.previousPage()" ng-disabled="vm.pagination.currentPage == 1">Previous</button>
     {{vm.pagination.currentPage}} from {{vm.pagination.pagesCount}}
-    <button>Next</button>
+    <button ng-click="vm.pagination.nextPage()" ng-disabled="vm.pagination.pagesCount == vm.pagination.currentPage">Next</button>
 </div>
 </body>
 

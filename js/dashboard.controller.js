@@ -9,7 +9,7 @@
     function DashboardCtrl() {
 
         var vm = this;
-
+        vm.rowIndex = 0;
         vm.model = {
             orders: [
                 {date: '2016-05-22T18:46:19Z', country: 'Ukraine', price: 2, status: 'open', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquid consequuntur corporis culpa deleniti, doloreius harum illo iure magnam nobis officia optio perferendis, possimus quisquam repellat voluptas! Excepturi, rerum.'},
@@ -94,7 +94,11 @@
             currentPage: 1,
             rowCountTable: vm.model.orders.length,
             pagesCount: 1,
-            countPerPage: vm.model.orders.length
+            countPerPage: vm.model.orders.length,
+            rowCountChange: rowCountChange,
+            nextPage: nextPage,
+            previousPage: previousPage,
+            firstRowNumber: vm.model.orders[vm.rowIndex]
         };
 
         function orderBy(param) {
@@ -106,6 +110,29 @@
             vm.model.orderParam = param;
         }
 
+        function rowCountChange() {
+        	vm.pagination.pagesCount = Math.ceil(vm.model.orders.length / vm.pagination.countPerPage);
+        	vm.pagination.currentPage = 1;
+
+        }
+        function nextPage() {
+        	if(vm.pagination.pagesCount != vm.pagination.currentPage) {
+        		vm.pagination.currentPage++;
+        		vm.pagination.rowIndex += vm.pagination.countPerPage;
+        		vm.pagination.firstRowNumber = vm.model.orders[vm.pagination.rowIndex];
+         	} else {
+        		return;
+        	}
+        }
+        function previousPage() {
+        	if(vm.pagination.currentPage != 1) {
+        		vm.pagination.currentPage--;
+        		vm.pagination.rowIndex -= vm.pagination.countPerPage;
+        		vm.pagination.firstRowNumber = vm.model.orders[vm.pagination.rowIndex];
+         	} else {
+        		return;
+        	}
+        }
     }
 
 })();
