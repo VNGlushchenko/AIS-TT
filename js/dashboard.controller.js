@@ -9,7 +9,6 @@
     function DashboardCtrl() {
 
         var vm = this;
-        vm.rowIndex = 0;
         vm.model = {
             orders: [
                 {date: '2016-05-22T18:46:19Z', country: 'Ukraine', price: 2, status: 'open', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquid consequuntur corporis culpa deleniti, doloreius harum illo iure magnam nobis officia optio perferendis, possimus quisquam repellat voluptas! Excepturi, rerum.'},
@@ -98,7 +97,7 @@
             rowCountChange: rowCountChange,
             nextPage: nextPage,
             previousPage: previousPage,
-            firstRowNumber: vm.model.orders[vm.rowIndex]
+            firstRowNumber: 0
         };
 
         function orderBy(param) {
@@ -113,22 +112,21 @@
         function rowCountChange() {
         	vm.pagination.pagesCount = Math.ceil(vm.model.orders.length / vm.pagination.countPerPage);
         	vm.pagination.currentPage = 1;
+        	vm.pagination.firstRowNumber = 0;
 
         }
         function nextPage() {
         	if(vm.pagination.pagesCount != vm.pagination.currentPage) {
         		vm.pagination.currentPage++;
-        		vm.rowIndex += vm.pagination.countPerPage;
-        		vm.pagination.firstRowNumber = vm.model.orders[vm.pagination.rowIndex];
-         	} else {
+        		vm.pagination.firstRowNumber += vm.pagination.countPerPage;
+        		} else {
         		return;
         	}
         }
         function previousPage() {
         	if(vm.pagination.currentPage != 1) {
         		vm.pagination.currentPage--;
-        		vm.rowIndex -= vm.pagination.countPerPage;
-        		vm.pagination.firstRowNumber = vm.model.orders[vm.pagination.rowIndex];
+        		vm.pagination.firstRowNumber -= vm.pagination.countPerPage;
          	} else {
         		return;
         	}
