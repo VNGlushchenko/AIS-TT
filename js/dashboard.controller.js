@@ -118,7 +118,7 @@
         function nextPage() {
         	if(vm.pagination.pagesCount != vm.pagination.currentPage) {
         		vm.pagination.currentPage++;
-        		vm.pagination.rowIndex += vm.pagination.countPerPage;
+        		vm.rowIndex += vm.pagination.countPerPage;
         		vm.pagination.firstRowNumber = vm.model.orders[vm.pagination.rowIndex];
          	} else {
         		return;
@@ -127,7 +127,7 @@
         function previousPage() {
         	if(vm.pagination.currentPage != 1) {
         		vm.pagination.currentPage--;
-        		vm.pagination.rowIndex -= vm.pagination.countPerPage;
+        		vm.rowIndex -= vm.pagination.countPerPage;
         		vm.pagination.firstRowNumber = vm.model.orders[vm.pagination.rowIndex];
          	} else {
         		return;
