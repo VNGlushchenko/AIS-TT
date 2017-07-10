@@ -61,7 +61,7 @@
         </tr>
     </table>
     <br>
-    <div ng-show="vm.pagination.countPerPage != vm.pagination.rowCountTable">
+    <div ng-show="vm.pagination.countPerPage < vm.pagination.rowCountTable">
         <button ng-click="vm.pagination.previousPage()" ng-disabled="vm.pagination.currentPage == 1">Previous</button>
         {{vm.pagination.currentPage}} from {{vm.pagination.pagesCount}}
         <button ng-click="vm.pagination.nextPage()" ng-disabled="vm.pagination.pagesCount == vm.pagination.currentPage">Next</button>
