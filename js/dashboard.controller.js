@@ -6,7 +6,7 @@
         .module('myApp')
         .controller('DashboardCtrl', DashboardCtrl);
 
-    function DashboardCtrl() {
+    function DashboardCtrl($scope, $filter) {
 
         var vm = this;
         vm.model = {
@@ -83,8 +83,7 @@
                 {date: '2016-02-15T14:39:21Z', country: 'Israel', price: 4, status: 'pending', description: 'Consectetur delectus eveniet, ex laborum minima nesciunt nisi veniam! Asperiores, cumque, sapiente? Accusantium ad, at aut corporis culpa deleniti dignissimos et explicabo inventore, ipsam mollitia quia quibusdam ullam voluptate voluptates!'}
             ],
             orderParam: 'date',
-            reverse: false,
-            defaultStatus: 'all'
+            reverse: false
         };
 
         vm.menu = {
@@ -98,7 +97,8 @@
             rowCountChange: rowCountChange,
             nextPage: nextPage,
             previousPage: previousPage,
-            firstRowNumber: 0
+            firstRowNumber: 0,
+            rowCountTableChange: rowCountTableChange
         };
 
         function orderBy(param) {
@@ -111,7 +111,7 @@
         }
 
         function rowCountChange() {
-        	vm.pagination.pagesCount = Math.ceil(vm.model.orders.length / vm.pagination.countPerPage);
+        	vm.pagination.pagesCount = Math.ceil(vm.pagination.rowCountTable / vm.pagination.countPerPage);
         	vm.pagination.currentPage = 1;
         	vm.pagination.firstRowNumber = 0;
 
@@ -127,6 +127,11 @@
         		vm.pagination.currentPage--;
         		vm.pagination.firstRowNumber -= vm.pagination.countPerPage;
          	}
+        }
+        function rowCountTableChange() {
+        	vm.pagination.rowCountTable = $filter('orderStatus')(vm.model.orders,$scope.ordStatus).length;
+        	vm.pagination.countPerPage = vm.pagination.rowCountTable;
+        	rowCountChange();
         }
         
     }
