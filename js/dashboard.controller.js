@@ -101,6 +101,8 @@
             rowCountTableChange: rowCountTableChange
         };
 
+        vm.model.filteredOrders = vm.model.orders;
+
         function orderBy(param) {
             if (vm.model.orderParam === param) {
                 vm.model.reverse = !vm.model.reverse;
@@ -129,7 +131,8 @@
          	}
         }
         function rowCountTableChange() {
-        	vm.pagination.rowCountTable = $filter('orderStatus')(vm.model.orders,$scope.ordStatus).length;
+            vm.model.filteredOrders = $filter('orderStatus')(vm.model.orders,$scope.ordStatus);
+        	vm.pagination.rowCountTable = vm.model.filteredOrders.length;
         	vm.pagination.countPerPage = vm.pagination.rowCountTable;
         	rowCountChange();
         }

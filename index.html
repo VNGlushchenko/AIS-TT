@@ -52,7 +52,7 @@
                 <span ng-show="vm.model.orderParam == 'description'" class="sortorder" ng-class="{reverse: vm.model.reverse,orderedByParam : vm.model.orderParam == 'description'}"></span>
             </th>
         </tr>
-        <tr ng-repeat="order in vm.model.orders | orderBy : vm.model.orderParam : vm.model.reverse | orderStatus: ordStatus | limitTo : vm.pagination.countPerPage : vm.pagination.firstRowNumber">
+        <tr ng-repeat="order in vm.model.filteredOrders | orderBy : vm.model.orderParam : vm.model.reverse | limitTo : vm.pagination.countPerPage : vm.pagination.firstRowNumber">
             <td>{{ order.date | date : 'dd.MM.yyyy' }}</td>
             <td>{{ order.country }}</td>
             <td>{{ order.price | currency : '&pound;' }}</td>
