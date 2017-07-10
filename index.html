@@ -12,10 +12,10 @@
  
     <label for="orderStatus">Choose status:</label>
         <select id="orderStatus" ng-model="ordStatus">
-          <option ng-value="N">--choose status--</option>
-          <option ng-value="open">open</option>
-          <option ng-value="pending">pending</option>
-          <option ng-value="closed">closed</option>
+          <option ng-value="{{ vm.model.defaultStatus }}">all</option>
+          <option ng-value="'open'">open</option>
+          <option ng-value="'pending'">pending</option>
+          <option ng-value="'closed'">closed</option>
         </select>
     <br>
     <br>

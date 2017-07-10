@@ -83,7 +83,8 @@
                 {date: '2016-02-15T14:39:21Z', country: 'Israel', price: 4, status: 'pending', description: 'Consectetur delectus eveniet, ex laborum minima nesciunt nisi veniam! Asperiores, cumque, sapiente? Accusantium ad, at aut corporis culpa deleniti dignissimos et explicabo inventore, ipsam mollitia quia quibusdam ullam voluptate voluptates!'}
             ],
             orderParam: 'date',
-            reverse: false
+            reverse: false,
+            defaultStatus: 'all'
         };
 
         vm.menu = {

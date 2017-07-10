@@ -5,9 +5,12 @@
         .module("myApp")
         .filter("orderStatus", function() {
             return function(input, status) {
-
                 let output = input.filter(function(element) {
-                    return element.status == status;
+                    if (status=='all') {
+                        return true;
+                    } else {
+                        return element.status == status;
+                    }
                 })
                     return output;
                 } 
