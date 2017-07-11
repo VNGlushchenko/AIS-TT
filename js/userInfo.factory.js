@@ -12,7 +12,6 @@
 
         let model = {
             userData: {},
-            disabled: true,
             apiUrl: 'https://jsonplaceholder.typicode.com/users/1'
         };
 
@@ -25,13 +24,11 @@
         }
 
         function setUserData(newUserData) {
-            return $http.put(model.apiUrl, newUserData).then(response => model.userData = response.data).
-            finally(() => model.disabled = true);
+            return $http.put(model.apiUrl, newUserData);
         }
         
         return {
                 userData: model.userData,
-                disabled: model.disabled,
                 setUserData: setUserData
             }
 

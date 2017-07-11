@@ -13,7 +13,7 @@
         let vm = this;
 
         vm.model = {
-            userData: userInfoFactory.userData,
+            userModel: userInfoFactory,
             disabled: true
         };
 
@@ -22,7 +22,9 @@
         };
         
         function updateUser() {
-            userInfoFactory.setUserData(vm.model.userData);
+            userInfoFactory.setUserData(vm.model.userModel).
+            then(response => userModel.userData = response.data).
+            finally(() => vm.model.disabled = true);
             }
         }
 

@@ -12,9 +12,7 @@
 
         let vm = this;
 
-        vm.model = {
-            currentUser: userInfoFactory.userData
-        }
+        vm.model = userInfoFactory;
 
     }
 
