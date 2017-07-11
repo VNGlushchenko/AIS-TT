@@ -10,27 +10,24 @@
 
     function userInfoFactory($http) {
 
+        let apiUrl = 'https://jsonplaceholder.typicode.com/users/1'
         let model = {
             userData: {},
-            apiUrl: 'https://jsonplaceholder.typicode.com/users/1'
+            getUserData: getUserData,
+            setUserData: setUserData
         };
 
-        getUserData().then(
-        response => model.userData = response.data
-    	);
+        
 
         function getUserData() {
-            return $http.get(model.apiUrl);
+            return $http.get(apiUrl).then(response => model.userData = response.data);
         }
 
         function setUserData(newUserData) {
-            return $http.put(model.apiUrl, newUserData).then(response => model.userData = response.data);
+            return $http.put(apiUrl, newUserData).then(response => model.userData = response.data);
         }
         
-        return {
-                userData: model,
-                setUserData: setUserData
-            }
+        return model
 
     }
 

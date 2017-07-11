@@ -13,18 +13,22 @@
         let vm = this;
 
         vm.model = {
-            userModel: userInfoFactory,
-            disabled: true
+            //userModel: userInfoFactory,
+            disabled: true,
+            newUserData: {}
         };
+
 
         vm.menu = {
             updateUser: updateUser
         };
         
         function updateUser() {
-            userInfoFactory.setUserData(vm.model.userModel).
+            userInfoFactory.setUserData(vm.model.newUserData).
             finally(() => vm.model.disabled = true);
             }
-        }
-
+        
+        userInfoFactory.getUserData().then(
+        response => vm.model.newUserData = angular.copy(response));
+}
 })();
