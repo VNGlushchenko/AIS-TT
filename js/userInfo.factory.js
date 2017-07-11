@@ -24,11 +24,11 @@
         }
 
         function setUserData(newUserData) {
-            return $http.put(model.apiUrl, newUserData);
+            return $http.put(model.apiUrl, newUserData).then(response => model.userData = response.data);
         }
         
         return {
-                userData: model.userData,
+                userData: model,
                 setUserData: setUserData
             }
 

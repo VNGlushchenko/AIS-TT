@@ -23,7 +23,6 @@
         
         function updateUser() {
             userInfoFactory.setUserData(vm.model.userModel).
-            then(response => userModel.userData = response.data).
             finally(() => vm.model.disabled = true);
             }
         }
