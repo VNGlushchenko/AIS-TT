@@ -1,16 +1,25 @@
-.top-bar {
-    background-color: lightblue;
+.orders {
+    border-collapse: collapse;
 }
 
-.user-data {
-    text-align: right;
-    padding: 10px;
+.orders th {
+    border-bottom: 1px solid;
+}
+.orders td, .orders th {
+    border-left: 1px solid;
+    padding: 5px 10px;
+    max-width: 200px;
+}
+.orders td:first-child, .orders th:first-child {
+    border-left: none;
 }
 
-.data-block {
-    margin: 10px;
+.sortorder:after {
+    content: '\25b2';
 }
-
-input[readonly] {
-    background: lightgray;
+.sortorder.reverse:after {
+    content: '\25bc';
+}
+.orderedByParam {
+	color: red;
 }

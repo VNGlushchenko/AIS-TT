@@ -8,34 +8,72 @@
 </head>
 
 <body ng-app="myApp">
-<div class="top-bar" ng-controller="TopbarCtrl as tb">
-    <div class="user-data">
-        <span>{{ tb.model.currentUser.name }}</span><br>
-        <span>{{ tb.model.currentUser.email }}</span>
-    </div>
-
-</div>
 <div ng-controller="DashboardCtrl as vm">
-    <h3>My Profile</h3>
-    <div class="data-block">
-        <label for="userName">User Name</label><br>
-        <input id="userName" type="text" ng-readonly="vm.model.disabled" ng-model="vm.model.userData.name">
-    </div>
-    <div class="data-block">
-        <label for="userEmail">User Email</label><br>
-        <input id="userEmail" type="email" ng-readonly="vm.model.disabled" ng-model="vm.model.userData.email">
-    </div>
-    <div class="data-block">
-        <button ng-if="vm.model.disabled" ng-click="vm.model.disabled = false">Edit User Info</button>
-        <button ng-if="!vm.model.disabled" ng-click="vm.menu.updateUser()">Save User Info</button>
-    </div>
+ 
+    <label for="orderStatus">Choose status:</label>
+        <select id="orderStatus" ng-model="ordStatus" ng-init = "ordStatus = 'all'" ng-change="vm.pagination.rowCountTableChange()">
+          <option ng-value="'all'">all</option>
+          <option ng-value="'open'">open</option>
+          <option ng-value="'pending'">pending</option>
+          <option ng-value="'closed'">closed</option>
+        </select>
+    <br>
+    <br>
+    <label for="pagination">Show</label>
+        <select ng-model="vm.pagination.countPerPage" ng-change="vm.pagination.rowCountChange()" id="pagination">
+          <option ng-value="vm.pagination.rowCountTable">all</option>
+          <option ng-value="5">5</option>
+          <option ng-value="10">10</option>
+          <option ng-value="20">20</option>
+        </select>
+        <label>rows</label>
+    <br>
+    <br>
+    <table class="orders">
+        <tr>
+            <th ng-click="vm.menu.orderBy('date')">
+                <span ng-class="{orderedByParam : vm.model.orderParam == 'date'}">Date</span>
+                <span ng-show="vm.model.orderParam == 'date'" class="sortorder" ng-class="{reverse: vm.model.reverse,orderedByParam : vm.model.orderParam == 'date'}"></span>
+            </th>
+            <th ng-click="vm.menu.orderBy('country')">
+                <span ng-class="{orderedByParam : vm.model.orderParam == 'country'}">Country</span>
+                <span ng-show="vm.model.orderParam == 'country'" class="sortorder" ng-class="{reverse: vm.model.reverse,orderedByParam : vm.model.orderParam == 'country'}"></span>
+            </th>
+            <th ng-click="vm.menu.orderBy('price')">
+                <span ng-class="{orderedByParam : vm.model.orderParam == 'price'}">Price</span>
+                <span ng-show="vm.model.orderParam == 'price'" class="sortorder" ng-class="{reverse: vm.model.reverse,orderedByParam : vm.model.orderParam == 'price'}"></span>
+            </th>
+            <th ng-click="vm.menu.orderBy('status')">
+                <span ng-class="{orderedByParam : vm.model.orderParam == 'status'}">Status</span>
+                <span ng-show="vm.model.orderParam == 'status'" class="sortorder" ng-class="{reverse: vm.model.reverse,orderedByParam : vm.model.orderParam == 'status'}"></span>
+            </th>
+            <th ng-click="vm.menu.orderBy('description')">
+                <span ng-class="{orderedByParam : vm.model.orderParam == 'description'}">Description</span>
+                <span ng-show="vm.model.orderParam == 'description'" class="sortorder" ng-class="{reverse: vm.model.reverse,orderedByParam : vm.model.orderParam == 'description'}"></span>
+            </th>
+        </tr>
+        <tr ng-repeat="order in vm.model.filteredOrders | orderBy : vm.model.orderParam : vm.model.reverse | limitTo : vm.pagination.countPerPage : vm.pagination.firstRowNumber">
+            <td>{{ order.date | date : 'dd.MM.yyyy' }}</td>
+            <td>{{ order.country }}</td>
+            <td>{{ order.price | currency : '&pound;' }}</td>
+            <td>{{ order.status | limitTo : 1 | uppercase}}</td>
+            <td>{{ order.description | cut : 15 }}</td>
+        </tr>
+    </table>
+    <br>
+    <div ng-show="vm.pagination.countPerPage < vm.pagination.rowCountTable">
+        <button ng-click="vm.pagination.previousPage()" ng-disabled="vm.pagination.currentPage == 1">Previous</button>
+        {{vm.pagination.currentPage}} from {{vm.pagination.pagesCount}}
+        <button ng-click="vm.pagination.nextPage()" ng-disabled="vm.pagination.pagesCount == vm.pagination.currentPage">Next</button>
+    <div>
 </div>
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script src="js/core.module.js"></script>
-<script src="js/userInfo.factory.js"></script>
 <script src="js/dashboard.controller.js"></script>
-<script src="js/topbar.controller.js"></script>
+<script src="js/filters/cut.filter.js"></script>
+<script src="js/filters/orderStatus.filter.js"></script>
+
 </body>
 </html>
