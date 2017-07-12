@@ -6,28 +6,15 @@
         .module('myApp')
         .controller('DashboardCtrl', DashboardCtrl);
 
-    DashboardCtrl.$inject = ['userInfoFactory'];
+    DashboardCtrl.$inject = ['Photo'];
 
-    function DashboardCtrl(userInfoFactory) {
+    function DashboardCtrl(Photo) {
 
         let vm = this;
 
         vm.model = {
-            disabled: true,
-            newUserData: {}
+            photos: Photo.photo
         };
 
-        vm.menu = {
-            updateUser: updateUser
-        };
-        
-        userInfoFactory.getUserData().then(
-            response => vm.model.newUserData = angular.copy(response)
-        );
-
-        function updateUser() {
-            userInfoFactory.setUserData(vm.model.newUserData).
-            finally(() => vm.model.disabled = true);
-            }
-        }
+    }
 })();

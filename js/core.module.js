@@ -2,7 +2,8 @@
 
     'use strict';
 
-    angular.module("myApp", []);
+    angular.module("myApp", [])
+    	   .constant("apiUrl", "https://jsonplaceholder.typicode.com");
 
 })();
 

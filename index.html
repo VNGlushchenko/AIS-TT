@@ -8,33 +8,21 @@
 </head>
 
 <body ng-app="myApp">
-<div class="top-bar" ng-controller="TopbarCtrl as tb">
-    <div class="user-data">
-        <span>{{ tb.model.userData.name }}</span><br>
-        <span>{{ tb.model.userData.email }}</span>
-    </div>
-</div>
 <div ng-controller="DashboardCtrl as vm">
-    <h3>My Profile</h3>
-    <div class="data-block">
-        <label for="userName">User Name</label><br>
-        <input id="userName" type="text" ng-readonly="vm.model.disabled" ng-model="vm.model.newUserData.name">
-    </div>
-    <div class="data-block">
-        <label for="userEmail">User Email</label><br>
-        <input id="userEmail" type="email" ng-readonly="vm.model.disabled" ng-model="vm.model.newUserData.email">
-    </div>
-    <div class="data-block">
-        <button ng-if="vm.model.disabled" ng-click="vm.model.disabled = false">Edit User Info</button>
-        <button ng-if="!vm.model.disabled" ng-click="vm.menu.updateUser()">Save User Info</button>
-    </div>
+
+    <ul style="list-style: none;">
+        <li ng-repeat="photo in vm.model.photos | limitTo : 10">
+            <img ng-src={{photo.thumbnailUrl}}>
+            <br>
+        </li>
+    </ul>
+
 </div>
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script src="js/core.module.js"></script>
-<script src="js/userInfo.factory.js"></script>
 <script src="js/dashboard.controller.js"></script>
-<script src="js/topbar.controller.js"></script>
+<script src="js/models/photo.model.js"></script>
 </body>
 </html>
