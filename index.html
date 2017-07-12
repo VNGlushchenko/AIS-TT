@@ -8,11 +8,11 @@
 </head>
 
 <body ng-app="myApp">
-<div ng-controller="DashboardCtrl as vm">
 
-    <ul style="list-style: none;">
-        <li ng-repeat="photo in vm.model.photos | limitTo : 10">
-            <img ng-src="{{ photo.thumbnailUrl }}">
+<div ng-controller="DashboardCtrl as vm" ng-cloak>
+    <ul>
+        <li ng-repeat="photo in vm.model.photos | limitTo : 32">
+            <img ng-src="{{ photo.thumbnailUrl }}" alt={{photo.title}}>
             <br>
         </li>
     </ul>

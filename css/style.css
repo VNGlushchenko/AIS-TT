@@ -1,16 +1,11 @@
-.top-bar {
-    background-color: lightblue;
+ul {
+	list-style: none;
 }
 
-.user-data {
-    text-align: right;
-    padding: 10px;
+li {
+	display:inline-block;
 }
 
-.data-block {
-    margin: 10px;
-}
-
-input[readonly] {
-    background: lightgray;
+[ng-cloak] {
+  display: none !important;
 }

@@ -13,8 +13,8 @@
         let vm = this;
 
         vm.model = {
-            photos: Photo.photo
+            photos: []
         };
-
+        Photo.getAll().then(response => vm.model.photos = response.data);
     }
 })();
