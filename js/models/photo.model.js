@@ -4,23 +4,18 @@
 
 angular
     .module("myApp")
-    .factory("Photo", Photo);
+    .service("Photo", Photo);
 
 Photo.$inject = ['$http', 'apiUrl'];
 
 function Photo($http,apiUrl) {
 
-    let photo = {
-        getAll: getAll
-    };
-
-    function getAll() {
+    this.getAll = function () {
         return $http({
             method: "GET",
             url: apiUrl + "/photos"
         })
     }
 
-    return photo;
 }
 })();
