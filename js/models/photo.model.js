@@ -4,13 +4,13 @@
 
 angular
     .module("myApp")
-    .provider("Photo", ['$http', function ($http) {
+    .provider("Photo", function () {
 	let apiUrl = '';
-    this.config = function(url) {
+    this.setUrl = function(url) {
     	apiUrl = url;
     }
 
-    this.$get = function() {
+    this.$get = ['$http', function($http) {
     	let photo = {
     		getAll: getAll
     	};
@@ -23,7 +23,7 @@ angular
     	}
 
     	return photo;
-    }
-}]);
+    }]
+});
 
 })();
