@@ -4,26 +4,27 @@
 
 angular
     .module("myApp")
-    .provider("Photo", function () {
-	let apiUrl = '';
-    this.setUrl = function(url) {
-    	apiUrl = url;
+    .provider("Photo", Photo);
+
+Photo.$inject = ['$http', 'apiUrl'];
+
+function Photo($http,apiUrl) {
+
+    let photo = {
+        getAll: getAll
+    };
+
+    function getAll() {
+        return $http({
+            method: "GET",
+            url: apiUrl + "/photos"
+        })
     }
 
-    this.$get = ['$http', function($http) {
-    	let photo = {
-    		getAll: getAll
-    	};
-
-    	function getAll() {
-        	return $http({
-	            method: "GET",
-	            url: apiUrl + "/photos"
-        	})
-    	}
-
-    	return photo;
-    }]
-});
-
+    return {
+         $get: function() {
+            return photo;
+        }
+    };
+}
 })();

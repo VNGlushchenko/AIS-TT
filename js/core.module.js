@@ -3,9 +3,7 @@
     'use strict';
 
     angular.module("myApp", [])
-    	   .config(['PhotoProvider', function(PhotoProvider) {
-            PhotoProvider.setUrl('https://jsonplaceholder.typicode.com');
-        }]);
+    	   .constant("apiUrl", "https://jsonplaceholder.typicode.com");
 
 })();
 
