@@ -4,7 +4,7 @@
 
 angular
     .module("myApp")
-    .provider("Photo", ['$http', function Photo($http) {
+    .provider("Photo", ['$http', function ($http) {
 	let apiUrl = '';
     this.config = function(url) {
     	apiUrl = url;
