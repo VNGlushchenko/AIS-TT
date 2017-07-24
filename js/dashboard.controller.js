@@ -1,4 +1,4 @@
-;(function () {
+;(function() {
 
     'use strict';
 
@@ -19,5 +19,6 @@
         FakeData.getUsers();
         FakeData.getTodos();
         FakeData.getMyFavoriteUser();
+        FakeData.getAlbums();
     }
 })();
