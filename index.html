@@ -11,7 +11,7 @@
 <div class="loader"></div>
 <div ng-controller="DashboardCtrl as vm" ng-cloak>
     <ul>
-        <li ng-repeat="photo in vm.model.photos | limitTo : 32" ng-cloak>
+        <li ng-repeat="photo in vm.model.photos | limitTo : 8" ng-cloak>
             <img ng-src="{{ photo.thumbnailUrl }}" ng-attr-alt="{{photo.title}}">
             <br>
         </li>
@@ -22,7 +22,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script src="js/core.module.js"></script>
-<script src="js/models/photo.model.js"></script>
+<script src="js/models/hw.model.js"></script>
 <script src="js/dashboard.controller.js"></script>
 </body>
 </html>

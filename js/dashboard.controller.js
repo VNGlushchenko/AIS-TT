@@ -6,15 +6,18 @@
         .module('myApp')
         .controller('DashboardCtrl', DashboardCtrl);
 
-    DashboardCtrl.$inject = ['Photo'];
+    DashboardCtrl.$inject = ['FakeData'];
 
-    function DashboardCtrl(Photo) {
+    function DashboardCtrl(FakeData) {
 
         let vm = this;
 
         vm.model = {
             photos: []
         };
-        Photo.getAll().then(response => vm.model.photos = response.data);
+        FakeData.getPhotos().then(response => vm.model.photos = response.data);
+        FakeData.getUsers();
+        FakeData.getTodos();
+        FakeData.getMyFavoriteUser();
     }
 })();
